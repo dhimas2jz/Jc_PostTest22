@@ -1,0 +1,1431 @@
+{
+	"info": {
+		"_postman_id": "1dec3d52-460a-4369-9a61-034e8efc5e95",
+		"name": "Fakestore API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24832082"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Get All Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"response body should array\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .to.be.an(\"array\");\r",
+									"})\r",
+									"\r",
+									"pm.test(\"response should contain at least one item\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .lengthOf.at.least(1);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/products",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"\r",
+									"let message = 'Respone body should be an project and cotain at least one item';\r",
+									"pm.test(message, ()=> {\r",
+									"const responseJSON = pm.response.json();\r",
+									"pm.expect(responseJSON).to.be.an(\"object\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/products/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Category by Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"response body should array\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .to.be.an(\"array\");\r",
+									"})\r",
+									"\r",
+									"pm.test(\"response should contain at least one item\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .lengthOf.at.least(1);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/products/categories",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Limit results",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response harus 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header harus json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response harus array\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .to.be.an(\"array\");\r",
+									"})\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response harus memiliki setidaknya 1 data\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .lengthOf.at.least(1);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://fakestoreapi.com/products?limit=5",
+							"protocol": "https",
+							"host": [
+								"fakestoreapi",
+								"com"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sort results",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response harus 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header harus json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response harus array\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .to.be.an(\"array\");\r",
+									"})\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response harus memiliki setidaknya 1 data\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .lengthOf.at.least(1);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://fakestoreapi.com/products?sort=desc",
+							"protocol": "https",
+							"host": [
+								"fakestoreapi",
+								"com"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get A Category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"response body should array\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .to.be.an(\"array\");\r",
+									"})\r",
+									"\r",
+									"pm.test(\"response should contain at least one item\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .lengthOf.at.least(1);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/products/category/electronics",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products",
+								"category",
+								"electronics"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get products in a specific category",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response harus 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header harus json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response harus array\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .to.be.an(\"array\");\r",
+									"})\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response harus memiliki setidaknya 1 data\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .lengthOf.at.least(1);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://fakestoreapi.com/products/category/jewelery",
+							"protocol": "https",
+							"host": [
+								"fakestoreapi",
+								"com"
+							],
+							"path": [
+								"products",
+								"category",
+								"jewelery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"let message = 'Respone body should be an project and cotain at least one item';\r",
+									"pm.test(message, ()=> {\r",
+									"const responseJSON = pm.response.json();\r",
+									"pm.expect(responseJSON).to.be.an(\"object\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n                    \"title\": \"test product\",\r\n                    \"price\": \"13.5\",\r\n                    \"description\": \"lorem ipsum set\",\r\n                    \"image\": \"https://i.pravatar.cc\",\r\n                    \"category\": \"electronic\"\r\n                }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/products",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"let message = 'Respone body should be an project and cotain at least one item';\r",
+									"pm.test(message, ()=> {\r",
+									"const responseJSON = pm.response.json();\r",
+									"pm.expect(responseJSON).to.be.an(\"object\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n                    \"id\": \"21\",\r\n                    \"title\": \"test product ke 2\",\r\n                    \"price\": \"10.5\",\r\n                    \"description\": \"set ipsu lorem\",\r\n                    \"image\": \"https://i.pravatar.cc\",\r\n                    \"category\": \"jewelery\"\r\n                }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/products/21",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products",
+								"21"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/products/21",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"products",
+								"21"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Carts",
+			"item": [
+				{
+					"name": "Get All Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"response body should array\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .to.be.an(\"array\");\r",
+									"})\r",
+									"\r",
+									"pm.test(\"response should contain at least one item\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .lengthOf.at.least(1);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/carts",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cart by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"\r",
+									"let message = 'Respone body should be an project and cotain at least one item';\r",
+									"pm.test(message, ()=> {\r",
+									"const responseJSON = pm.response.json();\r",
+									"pm.expect(responseJSON).to.be.an(\"object\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/carts/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"carts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"response body should array\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .to.be.an(\"array\");\r",
+									"})\r",
+									"\r",
+									"pm.test(\"response should contain at least one item\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .lengthOf.at.least(1);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/carts/user/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"carts",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Limit Results",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response harus 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header harus json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response harus array\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .to.be.an(\"array\");\r",
+									"})\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response harus memiliki setidaknya 1 data\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .lengthOf.at.least(1);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://fakestoreapi.com/carts?limit=5",
+							"protocol": "https",
+							"host": [
+								"fakestoreapi",
+								"com"
+							],
+							"path": [
+								"carts"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sort Results",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response harus 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header harus json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response harus array\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .to.be.an(\"array\");\r",
+									"})\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response harus memiliki setidaknya 1 data\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .lengthOf.at.least(1);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://fakestoreapi.com/carts?sort=desc",
+							"protocol": "https",
+							"host": [
+								"fakestoreapi",
+								"com"
+							],
+							"path": [
+								"carts"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get carts in a date range",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response harus 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header harus json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response harus array\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .to.be.an(\"array\");\r",
+									"})\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response harus memiliki setidaknya 1 data\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .lengthOf.at.least(1);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://fakestoreapi.com/carts/user/1?startdate=2020-01-02&enddate=2020-02-02",
+							"protocol": "https",
+							"host": [
+								"fakestoreapi",
+								"com"
+							],
+							"path": [
+								"carts",
+								"user",
+								"1"
+							],
+							"query": [
+								{
+									"key": "startdate",
+									"value": "2020-01-02"
+								},
+								{
+									"key": "enddate",
+									"value": "2020-02-02"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"let message = 'Respone body should be an project and cotain at least one item';\r",
+									"pm.test(message, ()=> {\r",
+									"const responseJSON = pm.response.json();\r",
+									"pm.expect(responseJSON).to.be.an(\"object\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"userId\": 9,\r\n        \"date\": \"2020-02-03\",\r\n        \"products\": [\r\n            {\r\n                \"productId\": 5,\r\n                \"quantity\": 1\r\n            },\r\n            {\r\n                \"productId\": 1,\r\n                \"quantity\": 5\r\n            }\r\n        ]\r\n}\r\n    ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/carts",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"let message = 'Respone body should be an project and cotain at least one item';\r",
+									"pm.test(message, ()=> {\r",
+									"const responseJSON = pm.response.json();\r",
+									"pm.expect(responseJSON).to.be.an(\"object\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 11,\r\n    \"userId\": 9,\r\n    \"date\": \"2022-12-07\",\r\n    \"products\": [\r\n        {\r\n            \"productId\": 6,\r\n            \"quantity\": 2\r\n        },\r\n        {\r\n            \"productId\":2,\r\n            \"quantity\": 6\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/carts/11",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"carts",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/carts/11",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"carts",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"response body should array\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .to.be.an(\"array\");\r",
+									"})\r",
+									"\r",
+									"pm.test(\"response should contain at least one item\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .lengthOf.at.least(1);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"\r",
+									"let message = 'Respone body should be an project and cotain at least one item';\r",
+									"pm.test(message, ()=> {\r",
+									"const responseJSON = pm.response.json();\r",
+									"pm.expect(responseJSON).to.be.an(\"object\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/users/1",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail User Sort Result",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response harus 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header harus json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response harus array\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .to.be.an(\"array\");\r",
+									"})\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response harus memiliki setidaknya 1 data\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .lengthOf.at.least(1);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/users?sort=desc",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Detail User Limit Result",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response harus 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response header harus json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response harus array\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .to.be.an(\"array\");\r",
+									"})\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response harus memiliki setidaknya 1 data\", function () {\r",
+									"  const results = pm.response.json();\r",
+									"  pm.expect(results)\r",
+									"    .lengthOf.at.least(1);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{Base_URL}}/users?limit=5",
+							"host": [
+								"{{Base_URL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"let message = 'Respone body should be an project and cotain at least one item';\r",
+									"pm.test(message, ()=> {\r",
+									"const responseJSON = pm.response.json();\r",
+									"pm.expect(responseJSON).to.be.an(\"object\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": {\r\n        \"geolocation\": {\r\n            \"lat\": \"-37.3159\",\r\n            \"long\": \"81.1496\"\r\n        },\r\n        \"city\": \"jakarta\",\r\n        \"street\": \"melati\",\r\n        \"number\": 1234,\r\n        \"zipcode\": \"12926-3874\"\r\n    },\r\n    \"email\": \"chaidar@gmail.com\",\r\n    \"username\": \"chaidar\",\r\n    \"password\": \"m38rmF$\",\r\n    \"name\": {\r\n        \"firstname\": \"Ahmad\",\r\n        \"lastname\": \"Chaidar\"\r\n    },\r\n    \"phone\": \"1-570-236-7033\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									"let message = 'Respone body should be an project and cotain at least one item';\r",
+									"pm.test(message, ()=> {\r",
+									"const responseJSON = pm.response.json();\r",
+									"pm.expect(responseJSON).to.be.an(\"object\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": {\r\n        \"geolocation\": {\r\n            \"lat\": \"-37.3159\",\r\n            \"long\": \"81.1496\"\r\n        },\r\n        \"city\": \"bandung\",\r\n        \"street\": \"mawar\",\r\n        \"number\": 1234,\r\n        \"zipcode\": \"12926-3874\"\r\n    },\r\n    \"id\": 11,\r\n    \"email\": \"chaidarrrrr@gmail.com\",\r\n    \"username\": \"chaidarrrrr\",\r\n    \"password\": \"m38rmF$qwqe\",\r\n    \"name\": {\r\n        \"firstname\": \"Chaidar\",\r\n        \"lastname\": \"Ahmad\"\r\n    },\r\n    \"phone\": \"5-510-246-6033\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/carts/11",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"carts",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/carts/11",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"carts",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"response status code 200\", function (){\r",
+									"   // console.log(pm.response.status);\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"response header should json\", function () {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\"))\r",
+									"    .to.equals(\"application/json; charset=utf-8\")\r",
+									"})\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "      {\r\n            \"username\": \"mor_2314\",\r\n                \"password\": \"83r5^_\"\r\n        }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "https://fakestoreapi.com"
+		},
+		{
+			"key": "Base_URL",
+			"value": "https://fakestoreapi.com",
+			"type": "string"
+		},
+		{
+			"key": "Base_Url",
+			"value": "fakestoreapi",
+			"type": "string"
+		}
+	]
+}
